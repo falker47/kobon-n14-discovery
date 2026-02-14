@@ -1,0 +1,31 @@
+# Python Virtual Environment
+Lib/
+Scripts/
+include/
+share/
+pyvenv.cfg
+
+# LaTeX Auxiliary Files (paper/)
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.toc
+paper/*.synctex.gz
+paper/*.fdb_latexmk
+paper/*.fls
+paper/*.pdf
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDE & OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+
+# Temporary / Generated Images in Paper
+paper/optical_aliasing_zoom_small.png
+paper/optical_aliasing_zoom.jpg
