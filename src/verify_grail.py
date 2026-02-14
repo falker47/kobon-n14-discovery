@@ -17,7 +17,7 @@ from itertools import combinations
 # ─── CONFIGURATION ──────────────────────────────────────────────────────────
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TARGET_FILE  = os.path.join(PROJECT_ROOT, "data", "solutions_run2", "N14_K54_3c335303.json")
-OUTPUT_IMAGE = os.path.join(PROJECT_ROOT, "assets", "HOLY_GRAIL_VALIDATED_K54.png")
+OUTPUT_IMAGE = os.path.join(PROJECT_ROOT, "assets", "Kobon_N14_K54.png")
 
 EPSILON      = 1e-9          # parallelism / cut tolerance
 RENDER_DPI   = 600
@@ -123,10 +123,10 @@ def render(genome, valid_triangles, k_verified):
 
     # ── 2. Create massive figure ──
     fig, ax = plt.subplots(figsize=(30, 30))
-    ax.set_title(
-        f"HOLY GRAIL — N={n}  K={k_verified}  [CPU STRICT VALIDATION]",
-        fontsize=28, fontweight="bold", pad=24,
-    )
+    # ax.set_title(
+    #     f"HOLY GRAIL — N={n}  K={k_verified}  [CPU STRICT VALIDATION]",
+    #     fontsize=28, fontweight="bold", pad=24,
+    # )
 
     # ── 3. Draw lines (hairline) ──
     x_range = np.linspace(x_lo, x_hi, 1000)
