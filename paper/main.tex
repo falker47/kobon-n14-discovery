@@ -45,7 +45,7 @@ To prevent premature convergence, we implemented a ``Dynamic Earthquake'' protoc
 \end{itemize}
 Supporting these resets, ``Fast Fail'' heuristics are employed to terminate low-performing seeds early, prioritizing computational budget for lineages that reach $K \ge 52$ within a fixed generational window.
 
-\section{Topological Obstacles: The Alpha Super-Attractor}
+\section{Topological Obstacles:\\The Alpha Super-Attractor}
 A critical finding of our exploration was the identification of a pervasive local minimum, which we designated the ``Alpha Super-Attractor.'' Topological variance analysis---performed by calculating the deviation of $\rho$ parameters across over 200 high-fitness samples ($K=53$)---revealed a rigid, invariant ``Skeleton'' comprising lines at indices 0 through 5.
 
 Mathematically, this Alpha Family represents a basin of attraction where the core geometry is locked in a near-optimal but globally sterile configuration. While the remaining eight ``mobile lines'' (indices 6-13) exhibit high variance as they adapt to close various peripheral triangles, the internal degrees of freedom within the 6-line core are insufficient to support a 54th triangle.
@@ -59,7 +59,7 @@ Standard stochastic methods are inevitably drawn into this Alpha well due to its
     \label{fig:diversity_analysis}
 \end{figure}
 
-\section{Evasion Protocol: Vectorial Taboo Search}
+\section{Evasion Protocol:\\Vectorial Taboo Search}
 To circumvent the Alpha Super-Attractor, we introduced a ``Vectorial Taboo Search'' regime. This protocol begins by extracting the rigid 6-line core of the Alpha Family as a $6 \times 2$ matrix, representing the $(\rho, \theta)$ coordinates of the lines at indices 0--5. This tensor serves as a ``forbidden'' geometric signature.
 
 As formalized in Algorithm \ref{alg:taboo_search}, a destructive fitness penalty is applied via the piecewise function defined in Equation \ref{eq:penalty}:
@@ -99,7 +99,7 @@ This negative pressure effectively reshapes the fitness landscape, turning the A
     \label{fig:fitness_landscape}
 \end{figure}
 
-\section{Results and Rigorous Validation}
+\section{Results\\and Rigorous Validation}
 The isolation of the Beta Family culminated in the discovery of the $K=54$ solution (see Figure \ref{fig:k54_solution}), as documented in \texttt{N14\_K54\_3c335303.json}. To guarantee full methodological transparency and verifiability, the complete CuPy source code, the CPU validation scripts, and the raw geometric coordinate arrays are publicly hosted at \url{https://github.com/falker47/kobon-n14-discovery}. However, given that GPU-accelerated fitness evaluation can be susceptible to ``Optical Aliasing''---floating-point epsilon hallucinations in acute-angle line intersections---further verification was required.
 
 \begin{figure}[htbp]

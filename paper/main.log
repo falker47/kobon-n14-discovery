@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.2.13)  14 FEB 2026 19:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.2.13)  16 FEB 2026 10:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -374,9 +374,9 @@ Underfull \hbox (badness 3039) in paragraph at lines 37--38
 
 
 ]
-Underfull \hbox (badness 1552) in paragraph at lines 48--48
-[]\OT1/cmr/bx/n/14.4 Topological Ob-sta-cles: The
- []
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\\' on input line 48.
 
 <diversity_analysis.png, id=53, 867.24pt x 433.62pt>
 File: diversity_analysis.png Graphic file (type png)
@@ -384,15 +384,18 @@ File: diversity_analysis.png Graphic file (type png)
 Package pdftex.def Info: diversity_analysis.png  used on input line 57.
 (pdftex.def)             Requested size: 236.84843pt x 118.4221pt.
 
-Underfull \hbox (badness 1005) in paragraph at lines 62--62
-[]\OT1/cmr/bx/n/14.4 Evasion Pro-to-col: Vec-to-rial
- []
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\\' on input line 62.
 
 <fitness_landscape.png, id=57, 578.16pt x 361.35pt>
 File: fitness_landscape.png Graphic file (type png)
 <use fitness_landscape.png>
 Package pdftex.def Info: fitness_landscape.png  used on input line 97.
 (pdftex.def)             Requested size: 236.84843pt x 148.02763pt.
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\\' on input line 102.
+
 [2 <./diversity_analysis.png>]
 <Kobon_N14_K54_paper.jpg, id=74, 3011.25pt x 1197.47375pt>
 File: Kobon_N14_K54_paper.jpg Graphic file (type jpg)
@@ -414,19 +417,29 @@ Underfull \hbox (badness 1859) in paragraph at lines 126--127
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
-Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 728F7A7AB362CF4855D5B72E75CEF8E5;1218.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `main.out':
+(rerunfilecheck)             Before: 728F7A7AB362CF4855D5B72E75CEF8E5;1218
+(rerunfilecheck)             After:  E31BBEB5D118CEBEFFC98FCF39E772E1;1194.
  ) 
 Here is how much of TeX's memory you used:
- 11075 strings out of 469514
- 172513 string characters out of 5467647
+ 11076 strings out of 469514
+ 172518 string characters out of 5467647
  605260 words of memory out of 5000000
- 39579 multiletter control sequences out of 15000+600000
+ 39580 multiletter control sequences out of 15000+600000
  636126 words of font info for 73 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  75i,14n,79p,1216b,517s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <c:/Users/Falker/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk><c:/Users/Falker/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/Users/Falker/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/Users/Falker/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/Users/Falker/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Users/Falker/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/Users/Falker/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/Users/Falker/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/Users/Falker/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/Users/Falker/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/Users/Falker/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Users/Falker/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/Users/Falker/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/Users/Falker/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (3 pages, 1141242 bytes).
+Output written on main.pdf (3 pages, 1141063 bytes).
 PDF statistics:
  152 PDF objects out of 1000 (max. 8388607)
  111 compressed objects within 2 object streams
