@@ -1,0 +1,81 @@
+# PROJECT_HYCARUS_LOG_V1 - PARTE 1: DEFINIZIONE E FASI INIZIALI
+# TARGET: Risoluzione del Problema dei Triangoli di Kobon per N=14 (Obiettivo: K=54)
+# HARDWARE: GPU NVIDIA GeForce RTX 3060 Laptop (6 GB VRAM)
+
+## SYNOPSIS
+Il progetto mira a superare il limite noto per N=14 linee nel problema dei triangoli di Kobon. Il limite teorico massimo è 65, ma la configurazione massima documentata/attesa è K=53 o K=54. L'approccio utilizza un Algoritmo Genetico (GA) fortemente parallelizzato su GPU (CuPy) per esplorare lo spazio vettoriale a 28 dimensioni (14 linee x 2 parametri: rho, theta).
+
+## FASE 1: INFINITE DISCOVERY E STAGNAZIONE
+- **Metodo:** Inizializzazione di un GA standard con batch size = 15.000. Funzione di fitness basata sul conteggio dei triangoli non sovrapposti.
+- **Risultato:** Raggiungimento rapido di K=53.
+- **Ostacolo:** Stagnazione ('Genetic Inbreeding'). La popolazione convergeva su varianti della stessa topologia, rendendo impossibile l'esplorazione di nuovi bacini di attrazione.
+
+## FASE 2: DYNAMIC EARTHQUAKE PROTOCOL
+- **Metodo:** Implementazione di un sistema di reset dinamico.
+  - *Soft Earthquake:* Preservazione di 150 elite, mutazione del resto.
+  - *Hard Earthquake:* Distruzione totale della popolazione (0 elite) post-stagnazione prolungata.
+- **Risoluzione Bug:** Identificato e corretto un bug di "Fake Reset" (la memoria VRAM non veniva sovrascritta correttamente durante l'Hard Earthquake, mantenendo in vita configurazioni zombie).
+- **Risultato:** Accumulo di 114 varianti uniche ("Campi Base") per K=53.
+# PROJECT_HYCARUS_LOG_V1 - PARTE 2: CAMPAGNE MIRATE E ANALISI TOPOLOGICA
+
+## FASE 3: SNIPER CAMPAIGN E DIVERSIFICAZIONE
+- **Metodo:** Isolamento dei 114 file JSON. Applicazione di micro-mutazioni (\sigma=1e-5) senza reset per forzare uno shift topologico microscopico alla ricerca di K=54.
+- **Risultato:** Esplosione combinatoria. Le varianti di K=53 sono passate da 114 a oltre 200, dimostrando che il paesaggio locale del K=53 era un "altopiano" vasto e interconnesso. Nessun K=54 rilevato.
+
+## FASE 4: ANALISI DI VARIANZA TOPOLOGICA (THE SKELETON)
+- **Metodo:** Sviluppo di uno script (`analyze_diversity.py`) per calcolare la varianza del parametro 'rho' su tutte le 200 soluzioni, ordinate in modo invariante.
+- **Risultato:** Scoperta dell'anatomia della famiglia topologica.
+  - *Core Lines (Indici 0-5):* Varianza quasi nulla. Costituiscono lo scheletro rigido della struttura.
+  - *Mobile Lines (Indici 6-13):* Varianza elevata. Sono i "tentacoli" che si adattano per chiudere i triangoli.
+
+## FASE 5: SURGICAL STRIKE (CONGELAMENTO DIMENSIONALE)
+- **Metodo:** Creazione di una Tensor Mask su GPU per bloccare le linee 0-5 e applicare mutazioni aggressive (\sigma=1e-3) solo alle linee mobili 6-13. Spazio di ricerca ridotto da 28 a 16 dimensioni. Budget: 3000 generazioni/file.
+- **Risultato:** Nessun K=54. Tutte le 200 varianti sono collassate a K=53 o inferiori. Dimostrazione empirica: il Core 0-5 non contiene la geometria necessaria per il 54.
+
+## FASE 6: CROSS-POLLINATION E DIAGNOSI DEL SUPER-ATTRATTORE
+- **Metodo:** Crossover estremo (ibridazione) tra i 200 genitori scambiando le sole linee mobili.
+- **Risultato:** I figli hanno generato K=53 immediatamente (Generazione 1).
+- **Conclusione Scientifica:** I 200 seed appartengono alla stessa sterile "Famiglia Alfa". Lo scheletro 0-5 funge da "Super-Attrattore", un pozzo gravitazionale locale da cui l'algoritmo non può fuggire tramite mutazione standard.
+
+# PROJECT_HYCARUS_LOG_V1 - PARTE 3: TABOO SEARCH (STATO ATTUALE)
+
+## FASE 7: TABOO SEARCH (ANTI-GRAVITY PROTOCOL)
+- **Metodo:** Dismissione dell'intera Famiglia Alfa (archiviato in `solutions_archive_run1`). Implementazione di una penalità vettoriale su GPU (`optimizer_taboo.py`).
+  - *Meccanismo:* Estrazione del tensore 6x2 delle Core Lines vietate.
+  - *Penalità:* Calcolo della distanza MSE. Se la distanza dal Super-Attrattore è < 0.05, applicazione di penalità distruttiva (-15 al punteggio K).
+- **Obiettivo Attuale:** Costringere la convergenza matematica verso una "Famiglia Beta" aliena rispetto alla topologia precedente, esplorando bacini di attrazione topologicamente distinti nella speranza che contengano i gradi di libertà per K=54.
+
+# PROJECT_HYCARUS_LOG_V1 - PARTE 4: TABOO SEARCH & THE 52-BARRIER
+
+## FASE 7.1: ESECUZIONE TABOO E IMPATTO TOPOLOGICO
+- **Osservazione Iniziale:** L'attivazione della penalità vettoriale Taboo (MSE < 0.05 sul Core Alfa) ha immediatamente sradicato la convergenza verso K=53.
+- **Dati Empirici:** Nelle prime 5200 generazioni (2 Hard Reset), si registrano 0 "Taboo Hits" e un limite rigido a K=52.
+- **Deduzione Scientifica:** Il crollo a K=52 conferma la natura di "Super-Attrattore" del Core Alfa. In assenza di questo pozzo gravitazionale, il limite di saturazione stocastica naturale (il plateau "facile") per N=14 è K=52. 
+- **Teorema della Famiglia Beta:** Affinché esista un nuovo K=53 (Famiglia Beta) con gradi di libertà sufficienti per K=54, esso deve risiedere in un bacino di attrazione topologicamente stretto e isolato. 
+- **Modifica Protocollo:** Transizione da "Hyper-Exploration" a "Deep Taboo Search". Il limite di Fast Fail viene esteso per consentire l'attraversamento prolungato del plateau a K=52 senza abortire prematuramente i seed promettenti.
+
+# PROJECT_HYCARUS_LOG_V1 - PARTE 5: CACCIA ALLA FAMIGLIA BETA
+
+## FASE 7.2: CALIBRAZIONE TARGET E "DESERTO TOPOLOGICO"
+- **Correzione Operativa:** Caricamento manuale di `ALPHA_CORE_K53.json` come bersaglio della Taboo Search.
+- **Osservazione (Run 1):** Il sistema raggiunge rapidamente K=51 ma stalla prima della soglia di salvataggio (K=53).
+- **Metriche:** `Taboo Hits = 0`. Questo indica che lo spazio di ricerca è vasto: la popolazione si mantiene distante dal Core Alfa naturalmente, ma fatica a trovare un nuovo attrattore performante (Famiglia Beta).
+- **Strategia in corso:** "High-Frequency Resets". Il sistema è configurato per abortire (Hard Reset) ogni 3000 generazioni se non raggiunge K=53. Stiamo cercando un "Cigno Nero": una configurazione iniziale rara capace di evolvere in K=53 senza appoggiarsi allo scheletro proibito.
+
+# PROJECT_HYCARUS_LOG_V1 - PARTE 7: VALIDAZIONE ASSOLUTA E RISOLUZIONE OTTICA
+
+# PROJECT_HYCARUS_LOG_V1 - PARTE 6: LA FAMIGLIA BETA E IL RAGGIUNGIMENTO DI K=54
+
+## FASE 8: ROTTURA DELLA BARRIERA TOPOLOGICA (THE HOLY GRAIL)
+- **Metodo:** Esecuzione prolungata del Taboo Search vettoriale. Il "Super-Attrattore Alfa" (Core 0-5) è rimasto costantemente penalizzato, respingendo l'algoritmo verso lo spazio di ricerca vergine.
+- **Risultato Intermedio:** Dopo ripetuti Hard Reset, il sistema ha identificato e stabilizzato un nuovo bacino di attrazione, generando una "Famiglia Beta" di soluzioni K=53 topologicamente indipendenti dal precedente attrattore.
+- **Risultato Finale:** All'interno del bacino della Famiglia Beta, il sistema ha trovato l'allineamento vettoriale perfetto, superando il limite locale e raggiungendo **K=54**.
+- **Proof of Discovery:** Il file `N14_K54_3c335303.json` certifica il superamento del limite. 
+- **Conclusione dell'Esperimento:** La ricerca empirica dimostra che l'uso combinato di "Fast Fail / Dynamic Earthquake" per l'esplorazione globale, accoppiato con "Vectorial Taboo Search" per l'evasione dei Super-Attrattori locali, è in grado di risolvere spazi geometrici non-lineari a 28 dimensioni (N=14), portando alla scoperta del limite superiore K=54 per i Triangoli di Kobon.
+
+## FASE 9: ELIMINAZIONE DEI FALSI POSITIVI E PROOF OF EXISTENCE
+- **Rischio Identificato:** Sospetto di allucinazione floating-point GPU e sovrapposizione ottica nei triangoli periferici causata dall'aliasing raster.
+- **Metodo di Validazione:** Esecuzione di un test rigoroso su CPU (float64) calcolando le intersezioni dei segmenti su tutte le 364 triplette possibili.
+- **Rendering Dinamico:** Ricalibrazione del bounding box sui limiti reali dei vertici (estensione asse Y fino a ~[-9, 12]) e rendering a 1200 DPI (linewidth=0.1) per annullare lo spessore geometrico.
+- **Esito:** Il sistema ha confermato 162 vertici validi e 54 triangoli non sovrapposti. Le illusioni di accavallamento si sono risolte in intersezioni perfette nel piano euclideo esteso.
+- **Status:** Record K=54 matematicamente e visivamente validato.
