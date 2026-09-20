@@ -1,3 +1,6 @@
+> [!NOTE]
+> **Historical snapshot.** This report predates the later invalid K(14)=54 candidate and is retained as a record of the earlier search state. The later K(14)=54 claim was retracted after independent review exposed a validation-pipeline double-counting error involving triangles 8 and 9. The project is no longer active in this repository. See [../README.md](../README.md) for the current scientific status.
+
 # Project Report: Computational Search for Kobon Triangle Bounds
 **Codename:** Hycarus / Kobon-14
 **Date:** February 2026
